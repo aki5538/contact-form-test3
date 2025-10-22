@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+// ユーザー側（未ログインOK）
+Route::get('/', [ContactController::class, 'index']); // トップページ(入力画面)
+Route::post('/confirm', [ContactController::class, 'confirm']); // 確認画面
+Route::post('/thanks', [ContactController::class, 'store']); // 完了画面
+
+
+// 管理者側（ログイン必須）
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [ContactController::class, 'admin']); // 管理画面
+    Route::get('/search', [ContactController::class, 'search']); // 検索
+    Route::post('/delete', [ContactController::class, 'destroy']); // 削除
+    Route::post('/export', [ContactController::class, 'export']); // CSV出力
 });

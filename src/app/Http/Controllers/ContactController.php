@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Category;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 
 
 class ContactController extends Controller
@@ -65,24 +67,57 @@ class ContactController extends Controller
     // 管理画面（ログイン後）
     public function admin()
     {
-        $contacts = Contact::latest()->paginate(7);
-        return view('admin', compact('contacts'));
+        $contacts = Contact::with('category')->latest()->paginate(7);
+        $categories = Category::all();
+        $csvData = Contact::all();
+
+        return view('admin', compact('contacts', 'categories', 'csvData'));
+
+
     }
 
     // 検索機能（管理者用）
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword');
-        $contacts = Contact::where('last_name', 'like', "%{$keyword}%")
-            ->orWhere('first_name', 'like', "%{$keyword}%")
-            ->orWhere('email', 'like', "%{$keyword}%")
-            ->paginate(7);
+         if ($request->has('reset')) {
+        return redirect('/admin')->withInput();
+    }
 
-        return view('admin', compact('contacts'));
+    $query = Contact::query();
+
+    if ($request->filled('name')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('last_name', 'like', '%' . $request->name . '%')
+              ->orWhere('first_name', 'like', '%' . $request->name . '%')
+              ->orWhereRaw("CONCAT(last_name, first_name) LIKE ?", ['%' . $request->name . '%']);
+        });
+    }
+
+    if ($request->filled('email')) {
+        $query->where('email', 'like', '%' . $request->email . '%');
+    }
+
+    if ($request->filled('gender') && $request->gender !== '全て') {
+        $query->where('gender', $request->gender);
+    }
+
+    if ($request->filled('contact_type')) {
+        $query->where('contact_type', 'like', '%' . $request->contact_type . '%');
+    }
+
+    if ($request->filled('date')) {
+        $query->whereDate('created_at', $request->date);
+    }
+
+    $contacts = $query->latest()->paginate(7)->appends($request->query());
+    $csvData = $query->get();
+    $categories = Category::all();
+
+    return view('admin', compact('contacts', 'categories', 'csvData'));
     }
 
     // 削除機能（管理者用）
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $id = $request->input('id');
         Contact::findOrFail($id)->delete();

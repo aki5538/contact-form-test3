@@ -20,4 +20,9 @@ class Contact extends Model
         'message',
         'category_id',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

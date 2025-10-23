@@ -155,7 +155,6 @@ return [
             'confirmPassword' => true,
             // 'window' => 0,
         ]),
-        Laravel\Fortify\Features::registration(),
     ],
 
 ];

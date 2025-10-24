@@ -1,30 +1,43 @@
 @extends('layouts.app') {{-- 共通レイアウトを継承 --}}
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
+@endsection
+
 @section('content')
+<h2 class="register-title">Register</h2>
+
 <div class="register-container">
-    <h1>FashionablyLate</h1>
-    <h2>Register</h2>
 
-<form method="POST" action="{{ route('register') }}">
-    @csrf
-    <label>お名前</label>
-    <input type="text" name="name" value="{{ old('name') }}">
-    @error('name')
-        <div style="color: red;">{{ $message }}</div>
-    @enderror
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+        <div class="input-group">
+            <div>
+                <label for="name">お名前</label>
+                <input type="text" name="name" value="{{ old('name') }}" placeholder="例）山田 太郎">
+                @error('name')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
 
-    <label>メールアドレス</label>
-    <input type="email" name="email" value="{{ old('email') }}">
-    @error('email')
-        <div style="color: red;">{{ $message }}</div>
-    @enderror
+            <div>
+                <label for="email">メールアドレス</label>
+                <input type="email" name="email" value="{{ old('email') }}" placeholder="例）test@example.com">
+                @error('email')
+                    <div style="error">{{ $message }}</div>
+                @enderror
+            </div>
 
-    <label>パスワード</label>
-    <input type="password" name="password" required>
-    
-    @error('password')
-        <div style="color: red;">{{ $message }}</div>
-    @enderror
+            <div>
+                <label for="password">パスワード</label>
+                <input type="password" name="password" placeholder="例）case4rrocks">
+                @error('password')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
 
-    <button type="submit">登録</button>
-</form>
+        <button type="submit">登録</button>
+    </form>
+</div>
+@endsection

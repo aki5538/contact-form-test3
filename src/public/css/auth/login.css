@@ -1,0 +1,16 @@
+.login-title {
+    width: 93px;
+    height: 46px;
+    background-color: #8B7969;
+    font-family: 'Inika', serif;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    border-radius: 4px;
+}

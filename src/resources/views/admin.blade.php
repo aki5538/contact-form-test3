@@ -4,6 +4,11 @@
 <div class="container">
     <h1>Admin</h1>
 
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+
     {{-- 🔍 検索フォーム --}}
     <form method="GET" action="/search">
         <input type="text" name="name" placeholder="お名前" value="{{ request('name') }}">

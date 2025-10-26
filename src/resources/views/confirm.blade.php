@@ -6,7 +6,8 @@
 @endsection
 
 @section('content')
-<h1>Confirm</h1>
+
+<div class="confirm-title">Confirm</div>
 
 <form action="/thanks" method="POST">
     @csrf
@@ -34,7 +35,7 @@
         </tr>
         <tr>
             <th>建物名</th>
-            <td>{{ $contact['building'] }}</td>
+            <td>{{ $contact['building_name'] ?? '(未入力)' }}</td>
         </tr>
         <tr>
             <th>お問い合わせの種類</th>
@@ -42,7 +43,7 @@
         </tr>
         <tr>
             <th>お問い合わせ内容</th>
-            <td>{{ $contact['detail'] }}</td>
+            <td>{{ $contact['inquiry'] }}</td>
         </tr>
     </table>
 
@@ -55,13 +56,13 @@
     <input type="hidden" name="tel2" value="{{ $contact['tel2'] }}">
     <input type="hidden" name="tel3" value="{{ $contact['tel3'] }}">
     <input type="hidden" name="address" value="{{ $contact['address'] }}">
-    <input type="hidden" name="building" value="{{ $contact['building'] }}">
+    <input type="hidden" name="building_name" value="{{ $contact['building_name'] }}">
     <input type="hidden" name="category_id" value="{{ $contact['category_id'] }}">
-    <input type="hidden" name="detail" value="{{ $contact['detail'] }}">
+    <input type="hidden" name="inquiry" value="{{ $contact['inquiry'] }}">
 
     <div class="button-group">
-        <input type="submit" name="back" value="修正する"formmethod="POST" formaction="/confirm">
-        <button type="submit" name="submit"formmethod="POST" formaction="/thanks">送信する</button>
+        <button type="submit" name="submit" formaction="/thanks" formmethod="POST" class="submit-button">送信</button>
+        <button type="submit" name="back" formaction="/confirm" formmethod="POST" class="back-button">修正</button>      
     </div>
 </form>
 @endsection

@@ -1,13 +1,21 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+@endsection
+
+@section('header-button')
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="logout-button">logout</button>
+</form>
+@endsection
+
 @section('content')
 <div class="container">
     <h1>Admin</h1>
-
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+</div>
+@endsection
 
     {{-- 🔍 検索フォーム --}}
     <form method="GET" action="/search">
@@ -107,4 +115,3 @@ document.querySelector('.close').addEventListener('click', () => {
     document.getElementById('detail-modal').style.display = 'none';
 });
 </script>
-@endsection

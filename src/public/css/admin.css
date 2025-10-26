@@ -1,0 +1,12 @@
+.logout-button {
+  width: 100px;
+  height: 34px;
+  background-color: #D9C6B5;
+  color: #FFFFFF;
+  font-family: 'Inika', serif;
+  font-size: 20px;
+  border: 1px solid #D9C6B5;
+  cursor: pointer;
+  text-align: center;
+  line-height: 34px;
+}

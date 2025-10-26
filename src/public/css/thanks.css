@@ -1,0 +1,51 @@
+.thanks-page {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.thanks-page-bg__inner {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.thanks-page-bg__text {
+  font-family: 'Inika', serif;
+  font-size: 180px;
+  font-weight: 400;
+  color: rgba(139, 121, 105, 0.05); /* ← #8B79690D を rgba に変換 */
+  line-height: 100%;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.thanks-page__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+}
+
+.thanks-page__message {
+  font-family: 'Inika', serif;
+  font-size: 24px;
+  color: #8B7969;
+  margin-bottom: 40px;
+}
+
+.thanks-page__btn {
+  background-color: #82756A;
+  color: #FFFFFF;
+  font-family: 'Inika', serif;
+  font-size: 20px;
+  padding: 10px 40px;
+  border: none;
+  cursor: pointer;
+}

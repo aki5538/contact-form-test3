@@ -26,15 +26,18 @@
 .header__login {
     width: 100px;
     height: 34px;
-    border: 1px solid #E0DFDE;
-    color: #D9C6B5;
+    border: 1px solid #8B7969;
+    color: #8B7969;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 20px;
     position: absolute;
     top: 33px;
     right: 40px;
 }
+
+
+

@@ -23,6 +23,11 @@ class ContactController extends Controller
     public function confirm(ContactRequest $request)
     {
         $inputs = $request->all();
+
+        // 建物名が未入力でもキーを補完
+        $inputs['building_name'] = $request->building_name ?? '';
+        
+        // カテゴリー名を取得
         $category = Category::find($request->category_id);
         $inputs['category_name'] = $category ? $category->name : '未選択';
         
@@ -30,9 +35,6 @@ class ContactController extends Controller
         $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
         $inputs['gender_label'] = $genderLabels[$request->gender] ?? '未選択'; // 表示用
         $inputs['gender'] = $request->gender; // 数値（1,2,3）
-
-
-
 
         return view('confirm', ['contact'=>$inputs]);
     }
@@ -59,7 +61,7 @@ class ContactController extends Controller
         'tel'        => $validated['tel'],
         'address'     => $validated['address'],
         'building'    => $validated['building'] ?? null,
-        'message'      => $validated['detail'],
+        'message'      => $validated['inquiry'],
     ]);
 
     return view('thanks');

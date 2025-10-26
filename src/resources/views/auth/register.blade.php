@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
 @endsection
 
+@section('header-button')
+<a href="{{ route('login') }}" class="header__login">login</a>
+@endsection
+
 @section('content')
 <h2 class="register-title">Register</h2>
 

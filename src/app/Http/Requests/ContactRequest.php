@@ -33,8 +33,8 @@ class ContactRequest extends FormRequest
             'tel2'       => 'required|digits_between:3,4',
             'tel3'       => 'required|digits:4',
             'address'     => 'required|string|max:100',
-            'building'    => 'nullable|string|max:100',
-            'detail'      => 'required|string|max:120',
+            'building_name'    => 'nullable|string|max:100',
+            'inquiry'      => 'required|string|max:120',
         ];
     }
      public function messages()
@@ -56,8 +56,8 @@ class ContactRequest extends FormRequest
             'tel3.max' => '電話番号は5桁までの数字で入力してください',
             'address.required' => '住所を入力してください',
             'category_id.required' => 'お問い合わせの種類を選択してください',
-            'detail.required' => 'お問い合わせの内容を入力してください',
-            'detail.max' => 'お問い合わせ内容は120文字以内で入力してください',
+            'inquiry.required' => 'お問い合わせの内容を入力してください',
+            'inquiry.max' => 'お問い合わせ内容は120文字以内で入力してください',
         ];
     }
 }

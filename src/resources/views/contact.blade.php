@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
 @endsection
 
@@ -11,103 +10,104 @@
 
     <form action="/confirm" method="POST">
         @csrf
-        <label for="name">お名前 <span class="required">※</span></label>
-        <div class="name-group">
-            <label for="last_name">姓 <span class="required">※</span></label>
-            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" placeholder="例：山田">
 
-            <label for="first_name">名 <span class="required">※</span></label>
-            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="例：太郎">
-        </div>
-        @error('last_name')
-            <div class="error">{{ $message }}</div>
-        @enderror
-        @error('first_name')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <div class="contact-form-wrapper">
 
-        <label for="gender">性別<span class="required">※</span></label>
-        <select name="gender" id="gender">
-            <option value="">性別を選択してください</option>
-            <option value="1" {{ old('gender') == 1 ? 'selected' : '' }}>男性</option>
-            <option value="2" {{ old('gender') == 2 ? 'selected' : '' }}>女性</option>
-            <option value="3" {{ old('gender') == 3 ? 'selected' : '' }}>その他</option>
-        </select>
-        @error('gender')
-            <div class="error">{{ $message }}</div>
-        @enderror
+        <div class="form-row">
+            <label class="form-label" for="last_name">お名前<span class="required">※</span></label>
+            <div class="form-inputs">
+                <input type="text" id="last_name" name="last_name" class="name-input" placeholder="例：山田" value="{{ old('last_name') }}">
+                <input type="text" id="first_name" name="first_name" class="name-input" placeholder="例：花子" value="{{ old('first_name') }}">
+            </div>
+            @error('last_name')
+                <div class="error">{{ $message }}</div>
+            @enderror
+            @error('first_name')
+                <div class="error">{{ $message }}</div>
+            @enderror
 
-        <label for="email">メールアドレス <span class="required">※</span></label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="例: sample@example.com">
-        @error('email')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <label for="tel">電話番号 <span class="required">※</span></label>
-        <div class="tel-group">
-            <input type="text" id="tel" name="tel1" value="{{ old('tel1') }}" maxlength="4" placeholder="090">
-            <span class="tel-dash">ー</span>
-            <input type="text" name="tel2" value="{{ old('tel2') }}" maxlength="4" placeholder="1234">
-            <span class="tel-dash">ー</span>
-            <input type="text" name="tel3" value="{{ old('tel3') }}" maxlength="4" placeholder="5678">
-            <input type="hidden" name="tel" value="{{ old('tel1') }}-{{ old('tel2') }}-{{ old('tel3') }}">
-        </div>
-        @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))
-            <div class="error">電話番号を入力してください</div>
-        @endif
-
-        <label for="address">住所 <span class="required">※</span></label>
-        <input type="text" name="address" value="{{ old('address') }}" placeholder="例: 東京都渋谷区千駄ヶ谷1-2-3">
-        @error('address')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <label for="building">建物名</label>
-        <input type="text" id="building" name="building" value="{{ old('building') }}" placeholder="例: サンライズマンション203">
-
-        <label for="category_id">お問い合わせの種類<span class="required">※</span></label>
-        <select name="category_id" id="category_id">
-            <option value="">選択してください</option>
-            @foreach($categories as $category)
-            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                {{ $category->name }}
-            </option>
-            @endforeach
-        </select>
-        @error('category_id')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <label for="content">お問い合わせ内容<span class="required">※</span></label>
-        <textarea id="detail" name="detail" rows="5" placeholder="お問い合わせ内容を入力してください">{{ old('detail') }}</textarea>
-        @error('content')
-            <div class="error">{{ $message }}</div>
-        @enderror
-
-        <button type="submit">確認画面へ</button>
-    </form>
-    
-    <!-- モーダル起動ボタン -->
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#infoModal">
-    詳細を見る
-    </button>
-
-    <!-- モーダル本体 -->
-    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="infoModalLabel">詳細情報</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            <div class="gender-group">
+                <label class="gender-label">性別<span class="required">※</span></label>
+                <div class="gender-options">
+                    <div class="gender-option">
+                        <input type="radio" id="gender_male" name="gender" value="1" {{ old('gender') == 1 ? 'checked' : '' }}>
+                        <label for="gender_male" class="gender-radio">男性</label>
+                    </div>
+                    <div class="gender-option">
+                        <input type="radio" id="gender_female" name="gender" value="2" {{ old('gender') == 2 ? 'checked' : '' }}>
+                        <label for="gender_female" class="gender-radio">女性</label>
+                    </div>
+                    <div class="gender-option">
+                        <input type="radio" id="gender_other" name="gender" value="3" {{ old('gender') == 3 ? 'checked' : '' }}>
+                        <label for="gender_other" class="gender-radio">その他</label>
+                    </div>
                 </div>
-                <div class="modal-body">
-                ここにモーダルの内容を記述します。
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                @error('gender')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="email-row">
+                <label class="email-label" for="email">メールアドレス<span class="required">※</span></label>
+                <input type="email" id="email" name="email" class="email-input" placeholder="例：test@example.com" value="{{ old('email') }}">
+                @error('email')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="tel-row">
+                <label class="form-label" for="tel1">電話番号<span class="required">※</span></label>
+                <div class="form-inputs">
+                    <input type="text" name="tel1" id="tel1" class="form-input" placeholder="080" value="{{ old('tel1') }}">
+                    <input type="text" name="tel2" id="tel2" class="form-input" placeholder="1234" value="{{ old('tel2') }}">
+                    <input type="text" name="tel3" id="tel3" class="form-input" placeholder="5678" value="{{ old('tel3') }}">
                 </div>
             </div>
+
+
+            @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))
+                <div class="error">電話番号を入力してください</div>
+            @endif
+
+            <div class="address-row">
+                <label class="address-label" for="address">住所 <span class="required">※</span></label>
+                <input type="text" name="address" id="address" class="address-input" value="{{ old('address') }}" placeholder="例: 東京都渋谷区千駄ヶ谷1-2-3">
+            </div>
+            @error('address')
+                <div class="error">{{ $message }}</div>
+            @enderror
+
+            <div class="building-row">
+                <label class="building-label" for="building_name">建物名</label>
+                <input type="text" id="building_name" name="building_name" class="building-input" value="{{ old('building_name') }}" placeholder="例: サンライズマンション203">
+            </div>
+
+            <div class="category-group">
+            <label class="category-label" for="category_id">お問い合わせの種類<span class="required">※</span></label>
+            <select name="category_id" id="category_id" class="inquiry-select">
+                <option value="" disabled select>選択してください</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+                @endforeach
+            </select>
+            @error('category_id')
+                <div class="error">{{ $message }}</div>
+            @enderror
+
+            <div class="inquiry-content-group">
+                <label class="inquiry-content-label" for="inquiry">お問い合わせ内容<span class="required">※</span></label>
+                <textarea id="inquiry" name="inquiry" class="inquiry-content-textarea" placeholder="お問い合わせ内容を入力してください">{{ old('inquiry') }}</textarea>
+            </div>
+            @error('inquiry')
+                <div class="error">{{ $message }}</div>
+            @enderror
         </div>
-    </div>
+
+        <div class="confirm-button-group">
+            <button type="submit" class="confirm-button">確認画面</button>
+        </div>
+    </form>
 </div>
 @endsection

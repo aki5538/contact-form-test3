@@ -4,75 +4,86 @@
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 @endsection
 
-@section('header-button')
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit" class="logout-button">logout</button>
-</form>
-@endsection
-
 @section('content')
-<div class="container">
-    <h1>Admin</h1>
-</div>
-@endsection
+<header class="header">
+    <div class="header__logo">FashionablyLate</div>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="logout-button">logout</button>
+    </form>
+</header>
+
+<main>
+    <div class="admin-title">Admin</div>
+    <div class="admin-container">
+
 
     {{-- 🔍 検索フォーム --}}
-    <form method="GET" action="/search">
-        <input type="text" name="name" placeholder="お名前" value="{{ request('name') }}">
-        <input type="email" name="email" placeholder="メールアドレス" value="{{ request('email') }}">
-        <select name="gender">
-            <option value="">性別</option>
-            <option value="全て" {{ request('gender') == '全て' ? 'selected' : '' }}>全て</option>
-            <option value="男性" {{ request('gender') == '男性' ? 'selected' : '' }}>男性</option>
-            <option value="女性" {{ request('gender') == '女性' ? 'selected' : '' }}>女性</option>
-            <option value="その他" {{ request('gender') == 'その他' ? 'selected' : '' }}>その他</option>
-        </select>
-        <input type="text" name="contact_type" placeholder="お問い合わせ種類" value="{{ request('contact_type') }}">
-        <input type="date" name="date" value="{{ request('date') }}">
-        <button type="submit">検索</button>
-        <button type="submit" name="reset" value="1">リセット</button>
-    </form>
+    <div class="search-form">
+        <form method="GET" action="/search" class="search-form__inner">
+            <input type="text" name="keyword" placeholder="名前やメールアドレスを入力してください" value="{{ request('keyword') }}"  class="search-input">
+            <select name="gender" class="search-select">
+                <option value="">性別</option>
+                <option value="全て" {{ request('gender') == '全て' ? 'selected' : '' }}>全て</option>
+                <option value="男性" {{ request('gender') == '男性' ? 'selected' : '' }}>男性</option>
+                <option value="女性" {{ request('gender') == '女性' ? 'selected' : '' }}>女性</option>
+                <option value="その他" {{ request('gender') == 'その他' ? 'selected' : '' }}>その他</option>
+            </select>
+
+            <input type="text" name="contact_type" placeholder="お問い合わせ種類" value="{{ request('contact_type') }}" class="search-input">
+            <input type="date" name="date" value="{{ request('date') }}" class="search-date">
+        
+            <button type="submit" class="search-button">検索</button>
+            <button type="submit" name="reset" value="1" class="reset-button">リセット</button>
+        </form>
+    </div>
 
     {{-- 📤 CSV出力 --}}
-    <form method="POST" action="/export">
-        @csrf
-        <input type="hidden" name="name" value="{{ request('name') }}">
-        <input type="hidden" name="email" value="{{ request('email') }}">
-        <input type="hidden" name="gender" value="{{ request('gender') }}">
-        <input type="hidden" name="contact_type" value="{{ request('contact_type') }}">
-        <input type="hidden" name="date" value="{{ request('date') }}">
-        <button type="submit">エクスポート</button>
-    </form>
+    <div class="table-controls">
+
+        <form method="POST" action="/export" class="export-form">
+            @csrf
+            <input type="hidden" name="name" value="{{ request('name') }}">
+            <input type="hidden" name="email" value="{{ request('email') }}">
+            <input type="hidden" name="gender" value="{{ request('gender') }}">
+            <input type="hidden" name="contact_type" value="{{ request('contact_type') }}">
+            <input type="hidden" name="date" value="{{ request('date') }}">
+            <button type="submit" class="export-button">エクスポート</button>
+        </form>
+
+        {{-- 📄 ページネーション --}}
+        <div class="pagination-wrapper">
+            {{ $contacts->links('vendor.pagination.default') }}      
+        </div>
+    </div>
 
     {{-- 📋 一覧テーブル --}}
-    <table>
-        <thead>
-            <tr>
-                <th>お名前</th>
-                <th>性別</th>
-                <th>メールアドレス</th>
-                <th>お問い合わせ種類</th>
-                <th>詳細</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($contacts as $contact)
-            <tr>
-                <td>{{ $contact->last_name }} {{ $contact->first_name }}</td>
-                <td>{{ $contact->gender }}</td>
-                <td>{{ $contact->email }}</td>
-                <td>{{ $contact->contact_type }}</td>
-                <td>
-                    <button class="detail-btn" data-contact='@json($contact)'>詳細</button>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    {{-- 📄 ページネーション --}}
-    {{ $contacts->links() }}
+    <div class="background-band">
+        <div class="table-wrapper">
+            <table class="inquiry-table">
+                <thead>
+                    <tr class="table-header">
+                        <th>お名前</th>
+                        <th>性別</th>
+                        <th>メールアドレス</th>
+                        <th>お問い合わせ種類</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($contacts as $contact)
+                    <tr>
+                        <td>{{ $contact->name }}</td>
+                        <td>{{ $contact->gender }}</td>
+                        <td>{{ $contact->email }}</td>
+                        <td>{{ $contact->contact_type }}</td>
+                        <td>
+                            <button class="detail-btn" data-contact='@json($contact)'>詳細</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
     {{-- 🪟 モーダルウィンドウ --}}
     <div id="detail-modal" style="display:none;">
@@ -92,7 +103,7 @@
             </form>
         </div>
     </div>
-</div>
+
 
 {{-- 🧠 モーダル制御JS --}}
 <script>
@@ -115,3 +126,6 @@ document.querySelector('.close').addEventListener('click', () => {
     document.getElementById('detail-modal').style.display = 'none';
 });
 </script>
+</div>
+</main>
+@endsection

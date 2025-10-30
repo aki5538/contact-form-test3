@@ -4,6 +4,13 @@
 <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
 @endsection
 
+
+@section('content')
+<header class="header">
+    <div class="header__logo">FashionablyLate</div>
+</header>
+
+
 @section('content')
 <div class="contact-form">
     <h1 class="contact-title">Contact</h1>

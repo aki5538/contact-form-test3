@@ -6,6 +6,11 @@
 @endsection
 
 @section('content')
+<header class="header">
+    <div class="header__logo">FashionablyLate</div>
+</header>
+
+@section('content')
 
 <div class="confirm-title">Confirm</div>
 

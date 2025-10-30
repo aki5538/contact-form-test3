@@ -1,5 +1,5 @@
 .contact-title {
-    width: 121px;
+    width: 200px;
     height: 46px;
     color: #8B7969;
     font-family: 'Inika', serif;
@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 40px auto 20px auto;
+    margin: 120px auto 20px auto;
     border-radius: 8px;
 }
 

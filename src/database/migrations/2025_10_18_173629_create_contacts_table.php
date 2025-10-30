@@ -23,7 +23,15 @@ class CreateContactsTable extends Migration
             $table->string('address');
             $table->string('building')->nullable();
             $table->unsignedBigInteger('category_id');
-            $table->text('detail');
+            $table->text('message');
+            $table->timestamps();
+        });
+
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('price');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

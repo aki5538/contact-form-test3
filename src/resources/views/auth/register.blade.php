@@ -4,13 +4,13 @@
 <link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
 @endsection
 
-@section('header-button')
-<a href="{{ route('login') }}" class="header__login">login</a>
-@endsection
+<header class="header">
+  <div class="header__logo">FashionablyLate</div>
+  <a href="{{ route('login') }}" class="header__login">login</a>
+</header>
 
 @section('content')
 <h2 class="register-title">Register</h2>
-
 <div class="register-container">
 
     <form method="POST" action="{{ route('register') }}">

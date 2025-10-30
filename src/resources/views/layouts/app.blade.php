@@ -14,16 +14,6 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="header__logo">FashionablyLate</div>
-        @yield('header-button')
-        @if (Route::currentRouteName() === 'register')
-            <a class="header__login" href="{{ route('login') }}">login</a>
-        @elseif (Route::currentRouteName() === 'login')
-            <a class="header__login" href="{{ route('register') }}">register</a>
-        @endif
-    </header>
-
     <main>
         @yield('content')
     </main>

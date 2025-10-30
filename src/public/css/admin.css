@@ -5,8 +5,232 @@
   color: #FFFFFF;
   font-family: 'Inika', serif;
   font-size: 20px;
+  font-weight: 400;
   border: 1px solid #D9C6B5;
-  cursor: pointer;
   text-align: center;
-  line-height: 34px;
+  line-height: 34px; /* ← 垂直中央揃え */
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  right: 150px; /* ← left: 1317px に相当する右端配置 */
+}
+
+.admin-title {
+  font-family: 'Inika', serif;
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 1;
+  color: #8B7969;
+  width: 111px;
+  height: 46px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E0DFDE;
+  z-index: 100;
+}
+
+main {
+  padding-top: 50px;
+}
+
+.search-form {
+  margin: 40px 0;
+}
+
+.search-form__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.search-input {
+  width: 347px;
+  height: 50px;
+  background-color: #FBFBFB;
+  border: 1px solid #E3DED9;
+  padding: 0 16px;
+  font-family: 'Inika', serif;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #BEB1A6;
+  font-size: 16px;
+}
+
+.search-select {
+  width: 150px;
+  height: 50px;
+  border: 1px solid #E3DED9;
+  background-color: #FBFBFB;
+  font-family: 'Inika', serif;
+  font-size: 16px;
+  color: #8B7969;
+ ;
+}
+
+.search-date {
+  width: 180px;
+  height: 50px;
+  border: 1px solid #E3DED9;
+  background-color: #FBFBFB;
+  font-family: 'Inika', serif;
+  font-size: 16px;
+  color: #8B7969;
+;
+}
+
+.search-button {
+  width: 100px;
+  height: 50px;
+  background-color: #8B7969;
+  color: #fff;
+  border: none;
+  font-family: 'Inika', serif;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.reset-button {
+  width: 100px;
+  height: 50px;
+  background-color: #fff;
+  color: #8B7969;
+  border: 1px solid #8B7969;
+  font-family: 'Inika', serif;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.export-form {
+  margin: 0; /* 必要に応じて調整 */
+}
+
+.export-button {
+  width: 148px;
+  height: 39px;
+  padding: 8px 20px;
+  background-color: rgba(225, 219, 214, 0.6); /* #E1DBD699 */
+  color: #8B7969;
+  font-family: 'Inika', serif;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.simple-pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inika', serif;
+  font-size: 18px;
+  color: #8B7969;
+  margin-top: 16px;
+}
+
+.simple-pagination a,
+.simple-pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 16px; /* 数字と矢印を揃える */
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #8B7969;
+}
+
+.simple-pagination .active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.simple-pagination .disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pagination-wrapper svg.w-5.h-5 {
+  width: 20px;
+  height: 20px;
+}
+
+.table-header {
+  background-color: #8B7969;
+  height: 59px;
+}
+
+.background-band {
+  width: 100%;
+  background-color: #8B7969;
+}
+
+.table-wrapper {
+  width: 1500px;
+  margin: 40px auto; /* 中央寄せ */
+}
+
+.inquiry-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.inquiry-table thead tr {
+  background-color: #8B7969;
+  height: 59px;
+}
+
+.inquiry-table th {
+  font-family: 'Inika', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: left;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+
+.inquiry-table td {
+  font-family: 'Inika', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  background-color: #FFFFFF;
+  padding: 12px 16px;
+  border-bottom: 1px solid #E0DFDE;
+  word-break: break-word;
 }

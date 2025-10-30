@@ -1,43 +1,37 @@
 .header {
-    width: 1512px;
-    height: 100px;
-    background-color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #E0DFDE;
-    box-sizing: border-box;
-    position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px; /* ← 中身の最大幅を制限 */
+  padding: 0 16px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E0DFDE;
+  z-index: 100;
 }
 
 .header__logo {
-    font-family: 'Inika', serif;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 100%;
-    letter-spacing: 0;
-    color: #8B7969;
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+  font-family: 'Inika', serif;
+  font-size: 24px;
+  color: #8B7969;
 }
 
-.header__login {
-    width: 100px;
-    height: 34px;
-    border: 1px solid #8B7969;
-    color: #8B7969;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    font-size: 20px;
-    position: absolute;
-    top: 33px;
-    right: 40px;
+.header__login,
+.logout-button {
+  width: 100px;
+  height: 34px;
+  border: 1px solid #8B7969;
+  color: #8B7969;
+  background-color: transparent;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 20px;
+  font-family: 'Inika', serif;
 }
-
-
-

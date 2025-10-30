@@ -24,9 +24,9 @@
 }
 
 .confirm-title {
-  width: 133px;
+  width: 200px;
   height: 43px;
-  margin: 50px auto 0; /* 中央配置＋上余白 */
+  margin:  120px auto 20px auto; /* 中央配置＋上余白 */
   font-family: 'Inika', serif;
   font-weight: 400;
   font-size: 35px;

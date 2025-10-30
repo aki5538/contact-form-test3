@@ -25,4 +25,11 @@ class Contact extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getNameAttribute()
+    {
+        return $this->last_name . ' ' . $this->first_name;
+    }
+
+
 }

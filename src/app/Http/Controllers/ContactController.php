@@ -9,7 +9,6 @@ use App\Models\Category;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
-
 class ContactController extends Controller
 {
     // トップページ
@@ -73,6 +72,7 @@ class ContactController extends Controller
         $categories = Category::all();
         $csvData = Contact::all();
 
+
         return view('admin', compact('contacts', 'categories', 'csvData'));
 
 
@@ -99,12 +99,16 @@ class ContactController extends Controller
         $query->where('email', 'like', '%' . $request->email . '%');
     }
 
+    $genderMap = ['男性' => '1', '女性' => '2', 'その他' => '3'];
+
     if ($request->filled('gender') && $request->gender !== '全て') {
-        $query->where('gender', $request->gender);
+    $query->where('gender', $genderMap[$request->gender] ?? $request->gender);
     }
 
     if ($request->filled('contact_type')) {
-        $query->where('contact_type', 'like', '%' . $request->contact_type . '%');
+        $query->whereHas('category', function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->contact_type . '%');
+    });
     }
 
     if ($request->filled('date')) {
@@ -123,13 +127,37 @@ class ContactController extends Controller
     {
         $id = $request->input('id');
         Contact::findOrFail($id)->delete();
-        return redirect()->route('admin')->with('status', '削除しました');
+        return redirect('/admin')->with('status', '削除しました');
     }
 
     // CSVエクスポート（管理者用）
     public function export()
     {
-        // 実装は後で追加（Laravel Excelなど）
-        return response()->download(storage_path('exports/contacts.csv'));
+         $contacts = Contact::all();
+
+        $response = new StreamedResponse(function () use ($contacts) {
+            $handle = fopen('php://output', 'w');
+
+            // ヘッダー行
+            fputcsv($handle, ['ID', '名前', '性別', 'メールアドレス', '電話番号', 'お問い合わせ内容']);
+
+            foreach ($contacts as $contact) {
+                fputcsv($handle, [
+                    $contact->id,
+                    $contact->last_name . ' ' . $contact->first_name,
+                    ['1' => '男性', '2' => '女性', '3' => 'その他'][$contact->gender] ?? '不明',
+                    $contact->email,
+                    $contact->tel,
+                    $contact->message,
+                ]);
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="contacts.csv"');
+
+        return $response;
     }
 }

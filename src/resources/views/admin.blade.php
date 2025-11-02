@@ -30,8 +30,14 @@
                 <option value="その他" {{ request('gender') == 'その他' ? 'selected' : '' }}>その他</option>
             </select>
 
-            <input type="text" name="contact_type" placeholder="お問い合わせ種類" value="{{ request('contact_type') }}" class="search-input">
-            <input type="date" name="date" value="{{ request('date') }}" class="search-date">
+            <select name="contact_type" class="search-select">
+                <option value="">お問い合わせ種類</option>
+                <option value="商品のお届けについて" {{ request('contact_type') == '商品のお届けについて' ? 'selected' : '' }}>商品のお届けについて</option>
+                <option value="商品の交換について" {{ request('contact_type') == '商品の交換について' ? 'selected' : '' }}>商品の交換について</option>
+                <option value="商品トラブル" {{ request('contact_type') == '商品トラブル' ? 'selected' : '' }}>商品トラブル</option>
+                <option value="ショップへのお問い合わせ" {{ request('contact_type') == 'ショップへのお問い合わせ' ? 'selected' : '' }}>ショップへのお問い合わせ</option>
+                <option value="その他" {{ request('contact_type') == 'その他' ? 'selected' : '' }}>その他</option>
+                <input type="date" name="date" value="{{ request('date') }}" class="search-date">
         
             <button type="submit" class="search-button">検索</button>
             <button type="submit" name="reset" value="1" class="reset-button">リセット</button>
@@ -73,7 +79,7 @@
                     @foreach ($contacts as $contact)
                     <tr>
                         <td>{{ $contact->name }}</td>
-                        <td>{{ $contact->gender }}</td>
+                        <td>{{ ['1' => '男性', '2' => '女性', '3' => 'その他'][$contact->gender] ?? '不明' }}</td>
                         <td>{{ $contact->email }}</td>
                         <td>{{ $contact->contact_type }}</td>
                         <td>
@@ -84,8 +90,51 @@
                 </tbody>
             </table>
         </div>
-
+    </div>
     {{-- 🪟 モーダルウィンドウ --}}
+    <style>
+        #detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 500px;
+            max-width: 90%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background-color: #e53935; /* 赤 */
+            color: #fff;               /* 白文字 */
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+    </style>
     <div id="detail-modal" style="display:none;">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -99,33 +148,37 @@
             <form method="POST" action="/delete" id="delete-form">
                 @csrf
                 <input type="hidden" name="id" id="delete-id">
-                <button type="submit">削除</button>
+                <button type="submit" class="delete-button">削除</button>
             </form>
         </div>
     </div>
 
 
-{{-- 🧠 モーダル制御JS --}}
-<script>
-document.querySelectorAll('.detail-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const contact = JSON.parse(btn.dataset.contact);
-        document.getElementById('modal-name').textContent = contact.last_name + ' ' + contact.first_name;
-        document.getElementById('modal-gender').textContent = contact.gender;
-        document.getElementById('modal-email').textContent = contact.email;
-        document.getElementById('modal-tell').textContent = contact.tell || '';
-        document.getElementById('modal-address').textContent = contact.address || '';
-        document.getElementById('modal-building').textContent = contact.building || '';
-        document.getElementById('modal-detail').textContent = contact.detail || '';
-        document.getElementById('delete-id').value = contact.id;
-        document.getElementById('detail-modal').style.display = 'block';
+    {{-- 🧠 モーダル制御JS --}}
+    <script>
+    document.querySelectorAll('.detail-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const contact = JSON.parse(btn.dataset.contact);
+            const genderMap = {
+                '1': '男性',
+                '2': '女性',
+                '3': 'その他'
+            };
+            document.getElementById('modal-name').textContent = contact.last_name + ' ' + contact.first_name;
+            document.getElementById('modal-gender').textContent = genderMap[contact.gender];
+            document.getElementById('modal-email').textContent = contact.email;
+            document.getElementById('modal-tell').textContent = contact.tel || '';
+            document.getElementById('modal-address').textContent = contact.address || '';
+            document.getElementById('modal-building').textContent = contact.building || '';
+            document.getElementById('modal-detail').textContent = contact.message || '';
+            document.getElementById('delete-id').value = contact.id;
+            document.getElementById('detail-modal').style.display = 'flex';
+        });
     });
-});
 
-document.querySelector('.close').addEventListener('click', () => {
-    document.getElementById('detail-modal').style.display = 'none';
-});
-</script>
-</div>
+    document.querySelector('.close').addEventListener('click', () => {
+        document.getElementById('detail-modal').style.display = 'none';
+    });
+    </script>
 </main>
 @endsection

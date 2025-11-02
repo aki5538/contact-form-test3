@@ -31,5 +31,18 @@ class Contact extends Model
         return $this->last_name . ' ' . $this->first_name;
     }
 
+    public function getGenderLabelAttribute()
+    {
+        return match ((int) $this->gender) {
+            1 => '男性',
+            2 => '女性',
+            3 => 'その他',
+        };
+    }
+
+    public function getContactTypeAttribute()
+    {
+        return optional($this->category)->name;
+    }
 
 }

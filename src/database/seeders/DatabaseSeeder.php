@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\Contact;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Product::factory(35)->create();
+        Contact::factory(35)->create();
     }
 }

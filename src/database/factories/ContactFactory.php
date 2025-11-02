@@ -22,7 +22,7 @@ class ContactFactory extends Factory
             'address' => $this->faker->address(),
             'building' => $this->faker->optional()->secondaryAddress(), // NULL可
             'category_id' => \App\Models\Category::inRandomOrder()->first()->id ?? 1, // 存在するIDをランダムで
-            'contact' => $this->faker->paragraph(),
+            'message' => $this->faker->paragraph(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

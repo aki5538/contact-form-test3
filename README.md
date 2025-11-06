@@ -4,7 +4,7 @@
 
 リポジトリをclone
 ```
-git clone git@github.com:aki5538/contact-form-test.git
+git clone git@github.com:aki5538/contact-form-test3.git
 cd contact-form-test3
 ```
 

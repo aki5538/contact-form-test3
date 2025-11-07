@@ -81,45 +81,45 @@ class ContactController extends Controller
     // 検索機能（管理者用）
     public function search(Request $request)
     {
-         if ($request->has('reset')) {
-        return redirect('/admin')->withInput();
-    }
+        if ($request->has('reset')) {
+            return redirect('/admin')->withInput();
+        }
 
-    $query = Contact::query();
+        $query = Contact::query();
 
-    if ($request->filled('name')) {
-        $query->where(function ($q) use ($request) {
-            $q->where('last_name', 'like', '%' . $request->name . '%')
-              ->orWhere('first_name', 'like', '%' . $request->name . '%')
-              ->orWhereRaw("CONCAT(last_name, first_name) LIKE ?", ['%' . $request->name . '%']);
-        });
-    }
+        if ($request->filled('name')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('last_name', 'like', '%' . $request->name . '%')
+                    ->orWhere('first_name', 'like', '%' . $request->name . '%')
+                    ->orWhereRaw("CONCAT(last_name, first_name) LIKE ?", ['%' . $request->name . '%']);
+            });
+        }
 
-    if ($request->filled('email')) {
-        $query->where('email', 'like', '%' . $request->email . '%');
-    }
+        if ($request->filled('email')) {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
 
-    $genderMap = ['男性' => '1', '女性' => '2', 'その他' => '3'];
+        $genderMap = ['男性' => '1', '女性' => '2', 'その他' => '3'];
 
-    if ($request->filled('gender') && $request->gender !== '全て') {
-    $query->where('gender', $genderMap[$request->gender] ?? $request->gender);
-    }
+        if ($request->filled('gender') && $request->gender !== '全て') {
+            $query->where('gender', $genderMap[$request->gender] ?? $request->gender);
+        }
 
-    if ($request->filled('contact_type')) {
-        $query->whereHas('category', function ($q) use ($request) {
-            $q->where('name', 'like', '%' . $request->contact_type . '%');
-    });
-    }
+        if ($request->filled('contact_type')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->contact_type . '%');
+            });
+        }
 
-    if ($request->filled('date')) {
-        $query->whereDate('created_at', $request->date);
-    }
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
+        }
 
-    $contacts = $query->latest()->paginate(7)->appends($request->query());
-    $csvData = $query->get();
-    $categories = Category::all();
+        $contacts = $query->latest()->paginate(7)->appends($request->query());
+        $csvData = $query->get();
+        $categories = Category::all();
 
-    return view('admin', compact('contacts', 'categories', 'csvData'));
+        return view('admin', compact('contacts', 'categories', 'csvData'));
     }
 
     // 削除機能（管理者用）
@@ -133,7 +133,7 @@ class ContactController extends Controller
     // CSVエクスポート（管理者用）
     public function export()
     {
-         $contacts = Contact::all();
+        $contacts = Contact::all();
 
         $response = new StreamedResponse(function () use ($contacts) {
             $handle = fopen('php://output', 'w');

@@ -39,8 +39,9 @@
                 <option value="その他" {{ request('contact_type') == 'その他' ? 'selected' : '' }}>その他</option>
                 <input type="date" name="date" value="{{ request('date') }}" class="search-date">
         
-            <button type="submit" class="search-button">検索</button>
-            <button type="submit" name="reset" value="1" class="reset-button">リセット</button>
+                <button type="submit" class="search-button">検索</button>
+                <button type="submit" name="reset" value="1" class="reset-button">リセット</button>
+            </select>
         </form>
     </div>
 

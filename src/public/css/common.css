@@ -1,37 +1,37 @@
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1300px; /* ← 中身の最大幅を制限 */
-  padding: 0 16px;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #E0DFDE;
-  z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px; /* ← 中身の最大幅を制限 */
+    padding: 0 16px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E0DFDE;
+    z-index: 100;
 }
 
 .header__logo {
-  font-family: 'Inika', serif;
-  font-size: 24px;
-  color: #8B7969;
+    font-family: 'Inika', serif;
+    font-size: 24px;
+    color: #8B7969;
 }
 
 .header__login,
 .logout-button {
-  width: 100px;
-  height: 34px;
-  border: 1px solid #8B7969;
-  color: #8B7969;
-  background-color: transparent;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  font-size: 20px;
-  font-family: 'Inika', serif;
+    width: 100px;
+    height: 34px;
+    border: 1px solid #8B7969;
+    color: #8B7969;
+    background-color: transparent;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 20px;
+    font-family: 'Inika', serif;
 }

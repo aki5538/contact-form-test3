@@ -1,110 +1,110 @@
 .header {
-  width: 1512px;
-  height: 100px;
-  background-color: #FFFFFF;
-  border: 1px solid #E0DFDE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
+    width: 1512px;
+    height: 100px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0DFDE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
 }
 
 .header-title {
-  width: 1509px;
-  height: 100px;
-  font-family: 'Inika', serif;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 100%;
-  letter-spacing: 0;
-  text-align: center;
-  vertical-align: middle;
-  background-color: #8B7969;
-  margin-left: 2.99px;
+    width: 1509px;
+    height: 100px;
+    font-family: 'Inika', serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #8B7969;
+    margin-left: 2.99px;
 }
 
 .confirm-title {
-  width: 200px;
-  height: 43px;
-  margin:  120px auto 20px auto; /* 中央配置＋上余白 */
-  font-family: 'Inika', serif;
-  font-weight: 400;
-  font-size: 35px;
-  line-height: 100%;
-  letter-spacing: 0;
-  color: #8B7969; /* ← 文字色を仕様通りに */
-  background-color: transparent; /* ← 背景は白（親要素に任せる） */
-  text-align: center;
+    width: 200px;
+    height: 43px;
+    margin:  120px auto 20px auto; /* 中央配置＋上余白 */
+    font-family: 'Inika', serif;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #8B7969; /* ← 文字色を仕様通りに */
+    background-color: transparent; /* ← 背景は白（親要素に任せる） */
+    text-align: center;
 }
 
 .confirm-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .confirm-table th {
-  background-color: #8B7969;
-  color: #FFFFFF;
-  font-family: 'Inika', serif;
-  font-size: 20px;
-  font-weight: 400;
-  padding: 20px;
-  text-align: left;
-  border-bottom: 1px solid #E0DFDE;
-  width: 30%;
+    background-color: #8B7969;
+    color: #FFFFFF;
+    font-family: 'Inika', serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #E0DFDE;
+    width: 30%;
 }
 
 .confirm-table td {
-  background-color: #FFFFFF;
-  color: #8B7969;
-  font-family: 'Inika', serif;
-  font-size: 20px;
-  font-weight: 400;
-  padding: 20px;
-  border-bottom: 1px solid #E0DFDE;
-  width: 70%;
+    background-color: #FFFFFF;
+    color: #8B7969;
+    font-family: 'Inika', serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 20px;
+    border-bottom: 1px solid #E0DFDE;
+    width: 70%;
 }
 
 .confirm-box {
-  width: 972px;
-  margin: 100px auto;
-  border: 1px solid #E0DFDE;
-  background-color: #FFFFFF;
-  padding: 40px;
+    width: 972px;
+    margin: 100px auto;
+    border: 1px solid #E0DFDE;
+    background-color: #FFFFFF;
+    padding: 40px;
 }
 
 .button-group {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
 }
 
 .back-button {
-  width: 120px;
-  height: 42px;
-  background-color: #FFFFFF;
-  color: #8B7969;
-  font-family: 'Inika', serif;
-  font-size: 20px;
-  font-weight: 400;
-  border: 1px solid #8B7969;
-  cursor: pointer;
-  padding: 10px 40px;
-  line-height: 100%;
-  white-space: nowrap;
+    width: 120px;
+    height: 42px;
+    background-color: #FFFFFF;
+    color: #8B7969;
+    font-family: 'Inika', serif;
+    font-size: 20px;
+    font-weight: 400;
+    border: 1px solid #8B7969;
+    cursor: pointer;
+    padding: 10px 40px;
+    line-height: 100%;
+    white-space: nowrap;
 }
 
 .submit-button {
-  width: 120px;
-  height: 42px;
-  background-color: #82756A;
-  color: #FFFFFF;
-  font-family: 'Inika', serif;
-  font-size: 20px;
-  font-weight: 400;
-  border: none;
-  cursor: pointer;
-  padding: 10px 40px;
-  line-height: 100%;
+    width: 120px;
+    height: 42px;
+    background-color: #82756A;
+    color: #FFFFFF;
+    font-family: 'Inika', serif;
+    font-size: 20px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    padding: 10px 40px;
+    line-height: 100%;
 }

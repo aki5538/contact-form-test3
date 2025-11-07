@@ -5,8 +5,8 @@
 @endsection
 
 <header class="header">
-  <div class="header__logo">FashionablyLate</div>
-  <a href="{{ route('login') }}" class="header__login">login</a>
+    <div class="header__logo">FashionablyLate</div>
+    <a href="{{ route('login') }}" class="header__login">login</a>
 </header>
 
 @section('content')

@@ -37,7 +37,8 @@ class ContactRequest extends FormRequest
             'inquiry'      => 'required|string|max:120',
         ];
     }
-     public function messages()
+    
+    public function messages()
     {
         return [
             'first_name.required' => '姓を入力してください',

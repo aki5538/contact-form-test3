@@ -1,18 +1,18 @@
 .register-title {
-  width: 200px; /* ← 93pxなど狭すぎると文字が潰れる */
-  height: 46px;
-  background-color: #fff;
-  color: #8B7969;
-  font-family: 'Inika', serif;
-  font-weight: 400;
-  font-size: 35px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  margin: 120px auto 20px auto; /* ← headerの高さ分だけ下げる */
-  z-index: 1;
+    width: 200px; /* ← 93pxなど狭すぎると文字が潰れる */
+    height: 46px;
+    background-color: #fff;
+    color: #8B7969;
+    font-family: 'Inika', serif;
+    font-weight: 400;
+    font-size: 35px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 120px auto 20px auto; /* ← headerの高さ分だけ下げる */
+    z-index: 1;
 }
 
 form label {
